@@ -105,16 +105,112 @@ const os = require('os')
 
 // console.log(absolute);
 
-const {readFileSync,writeFileSync} = require('fs')
-const first = readFileSync('./content/first.txt','utf8')
-const second = readFileSync('./content/second.txt','utf8')
+// const {readFileSync,writeFileSync} = require('fs')
+// const first = readFileSync('./content/first.txt','utf8')
+// const second = readFileSync('./content/second.txt','utf8')
 
-console.log(first,second);
+// console.log(first,second);
 
 // when u write this you can see the result of the first and second text files. (Bkz: First Second.)
 
-writeFileSync('./content/result-sync.txt',`Here is the result : ${first}, ${second},{flag:'a'}`)
+// writeFileSync('./content/result-sync.txt',`Here is the result : ${first}, ${second},{flag:'a'}`)
 
 // when u write this you can see the result of the result-sync.txt file. (Bkz: Here is the result : First, Second,{flag:'a'}) Check result-sync.txt file.
 
+// const {readFile,writeFile} = require('fs')
+//   readFile('./content/first.txt','utf8',(err,result)=>{
+//          if(err){
+//              console.log(err);
+//              return
+//      }
+// console.log(result);
+// })
 
+// // if we dont add utf8 here we will see the result as buffer. (Bkz: <Buffer 46 69 72 73 74 20 53 65 63 6f 6e 6)
+
+// const {readFile,writeFile} = require('fs')
+//   readFile('./content/first.txt','utf8',(err,result)=>{
+//          if(err){
+//              console.log(err);
+//              return
+//      }
+// const first = result
+// readFile('./content/second.txt','utf8',(err,result)=>{
+//     if(err){
+//         console.log(err);
+//         return
+// }
+// const second = result
+// writeFile('./content/result-async.txt',`Here is the result : ${first}, ${second}`,(err,result)=>{
+// if(err){
+//     console.log(err);
+//     return}
+// })
+// })})
+
+// when u write this you can see the result of the result-async.txt file. (Bkz: Here is the result : First, Second) write node.js in console to see result. Check result-async.txt file.
+
+// Asynchronous way
+
+// const {readFile,writeFile} = require('fs')
+// console.log('start');
+//   readFile('./content/first.txt','utf8',(err,result)=>{
+//          if(err){
+//              console.log(err);
+//              return
+//      }
+// const first = result
+// readFile('./content/second.txt','utf8',(err,result)=>{
+//     if(err){
+//         console.log(err);
+//         return
+// }
+// const second = result
+// writeFile('./content/result-async.txt',`Here is the result : ${first}, ${second}`,(err,result)=>{
+// if(err){
+//     console.log(err);
+//     return}
+//     console.log('done with this task');
+// })
+// })})
+
+// console.log('starting next task');
+
+// This is the async version of 10-fs-sync.js.
+// You can see the diffrence between sycn and async in the terminal. 
+// To see the diffrence you should write node 10-fs-sycn.js after that node 11-fs-async.js in the terminal.
+
+// HTTP Module
+
+// const http = require('http')
+
+// const server = http.createServer((req,res)=>{
+// res.write('Welcome to our home page')
+// res.end()
+// })
+
+// server.listen(5000)
+
+// when u write this you can see the result of the server but this time not in the terminal. Check: http://localhost:5000/
+// if you want to stop the server you can press ctrl + c in the terminal.
+
+// if you want to see diffrent outputs in diffrent pages you can write this:
+
+const http = require('http')
+
+const server = http.createServer((req,res)=>{
+if(req.url === '/'){
+res.end('Welcome to our home page')
+}
+if(req.url === '/about'){
+    res.end('Here is our short history')
+}
+res.end(`
+<h1>Oops!</h1>
+<p>We can't seem to find the page you are looking for</p>
+<a href="/">back home</a>
+`)})
+
+server.listen(5000)
+
+// When u write this and write http://localhost:5000/about you can see the text of the about page.
