@@ -196,21 +196,46 @@ const os = require('os')
 
 // if you want to see diffrent outputs in diffrent pages you can write this:
 
-const http = require('http')
+// const http = require('http')
 
-const server = http.createServer((req,res)=>{
-if(req.url === '/'){
-res.end('Welcome to our home page')
-}
-if(req.url === '/about'){
-    res.end('Here is our short history')
-}
-res.end(`
-<h1>Oops!</h1>
-<p>We can't seem to find the page you are looking for</p>
-<a href="/">back home</a>
-`)})
+// const server = http.createServer((req,res)=>{
+// if(req.url === '/'){
+// res.end('Welcome to our home page')
+// }
+// if(req.url === '/about'){
+//     res.end('Here is our short history')
+// }
+// res.end(`
+// <h1>Oops!</h1>
+// <p>We can't seem to find the page you are looking for</p>
+// <a href="/">back home</a>
+// `)})
 
-server.listen(5000)
+// server.listen(5000)
 
 // When u write this and write http://localhost:5000/about you can see the text of the about page.
+
+// NPM - Node Package Manager
+
+// npm - global command, comes with node
+// npm --version = you can see the version of your npm
+// local dependecy - use it only in this particular project
+// npm i <packageName>
+// global dependency - use it in any project
+// npm install -g <packageName>
+// sudo npm install -g <packageName> (mac)
+
+// package.json - manifest file (stores important info about project/package)
+// manual approach (create package.json in the root, create properties etc)
+// npm init (step by step, press enter to skip)
+// npm init -y (everything default)
+
+// We need these packages to create a server.
+
+const _ = require('lodash')
+
+const items = [1,[2,[3,[4]]]]
+const newItems = _.flattenDeep(items)
+console.log(newItems);
+
+// when u write this you can see the result of the flattenDeep function when u write node app.js in terminal. (Bkz: [ 1, 2, 3, 4 ])
