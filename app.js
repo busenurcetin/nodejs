@@ -239,3 +239,9 @@ const newItems = _.flattenDeep(items)
 console.log(newItems);
 
 // when u write this you can see the result of the flattenDeep function when u write node app.js in terminal. (Bkz: [ 1, 2, 3, 4 ])
+
+// npm i nodemon -D or --save-dev works same and it is for development dependency.
+
+// When we write npm run dev in scripts in package.json we can write npm run dev in the terminal to see the result of the app.js file instead of node app.js.
+
+// nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
