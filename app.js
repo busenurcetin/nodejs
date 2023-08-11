@@ -56,7 +56,7 @@
 
 // OS - PATH - FS - HTTP
 
-const os = require('os')
+// const os = require('os')
 
 // it works for all operating systems (Windows, Mac, Linux etc.) if you want to see the result you can write console.log(os) or console.log(os.userInfo()) or console.log(os.uptime()) etc.
 // to see all the methods you can write console.log(os) and check the methods part you can write os. and see the methods.
@@ -232,11 +232,11 @@ const os = require('os')
 
 // We need these packages to create a server.
 
-const _ = require('lodash')
+// const _ = require('lodash')
 
-const items = [1,[2,[3,[4]]]]
-const newItems = _.flattenDeep(items)
-console.log(newItems);
+// const items = [1,[2,[3,[4]]]]
+// const newItems = _.flattenDeep(items)
+// console.log(newItems);
 
 // when u write this you can see the result of the flattenDeep function when u write node app.js in terminal. (Bkz: [ 1, 2, 3, 4 ])
 
@@ -245,3 +245,66 @@ console.log(newItems);
 // When we write npm run dev in scripts in package.json we can write npm run dev in the terminal to see the result of the app.js file instead of node app.js.
 
 // nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+
+// to uninstall a package you can write npm uninstall <packageName> or npm un <packageName>
+
+// to install a package globally you can write npm install -g <packageName> (for example npm install -g lodash)
+
+// to create react app you can write npx create-react-app <appName> (for example npx create-react-app my-app)
+
+// console.log('first');
+// setTimeout(()=>{"second"
+// },0)
+// console.log('third');
+
+// completed and exited operating system process
+// when u write this you can see the result of the first,second and third in the terminal. (Bkz: first third second) even tho we put the second in the setTimeout function. This is because of the event loop. 
+
+// setInterval(()=>{
+//     console.log('hello world');
+// },2000)
+// console.log(`I will run first`);
+
+// when u write this you can see the result of the I will run first and hello world in the terminal. Because of the event loop the setInterval function will run every 2 seconds.
+// process stays alive unless
+// Kill process CONTROL + C
+// unexpected error 
+
+// const http = require('http')
+
+// const server = http.createServer((req,res)=>{
+//     console.log('request event');
+//     res.end('Hello World')
+// })
+
+// server.listen(5000,()=>{
+//     console.log('Server listening on port : 5000...');
+// })
+
+// when u write this you can see the result of the server in the terminal. (Bkz: Server listening on port : 5000...) and when u write http://localhost:5000/ in the browser you can see the result of the Hello World.
+
+const http = require('http')
+
+const server = http.createServer((req,res)=>{
+    if(req.url === '/'){
+        res.end('Welcome to our home page')
+    }
+    if(req.url === '/about'){
+        // BLOCKING CODE!!!
+        for(let i = 0; i < 1000; i++){
+            for (let j = 0; j < 1000; j++){
+                console.log(`${i} ${j}`);
+            }
+        }
+        res.end('Here is our short history')
+       
+    }
+    res.end(`
+    <h1>Oops!</h1>
+    <p>We can't seem to find the page you are looking for</p>
+    <a href="/">back home</a>
+    `)
+})
+
+server.listen(5000, ()=>{
+    console.log('Server listening on port : 5000...')});

@@ -32,3 +32,12 @@ res.end(`
 server.listen(5000)
 
 // When u write this and write http://localhost:5000/about you can see the text of the about page.
+
+// nodemon is a package that helps you to see the changes in the terminal without stopping the server and starting it again.
+
+// if you are more interested with json files you can check this website: https://jsonformatter.curiousconcept.com/ the basic of package.json link: https://docs.npmjs.com/cli/v7/configuring-npm/package-json
+
+// event loop youtube video: https://www.youtube.com/watch?v=8aGhZQkoFbQ
+
+
+
