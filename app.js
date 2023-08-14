@@ -126,7 +126,7 @@
 // console.log(result);
 // })
 
-// // if we dont add utf8 here we will see the result as buffer. (Bkz: <Buffer 46 69 72 73 74 20 53 65 63 6f 6e 6)
+// if we dont add utf8 here we will see the result as buffer. (Bkz: <Buffer 46 69 72 73 74 20 53 65 63 6f 6e 6)
 
 // const {readFile,writeFile} = require('fs')
 //   readFile('./content/first.txt','utf8',(err,result)=>{
@@ -283,28 +283,137 @@
 
 // when u write this you can see the result of the server in the terminal. (Bkz: Server listening on port : 5000...) and when u write http://localhost:5000/ in the browser you can see the result of the Hello World.
 
+// const http = require('http')
+
+// const server = http.createServer((req,res)=>{
+//     if(req.url === '/'){
+//         res.end('Welcome to our home page')
+//     }
+//     if(req.url === '/about'){
+//         // BLOCKING CODE!!!
+//         for(let i = 0; i < 1000; i++){
+//             for (let j = 0; j < 1000; j++){
+//                 console.log(`${i} ${j}`);
+//             }
+//         }
+//         res.end('Here is our short history')
+       
+//     }
+//     res.end(`
+//     <h1>Oops!</h1>
+//     <p>We can't seem to find the page you are looking for</p>
+//     <a href="/">back home</a>
+//     `)
+// })
+
+// server.listen(5000, ()=>{
+//     console.log('Server listening on port : 5000...')});
+
+// const {readFile, writeFile } = require('fs')
+// const util = require('util')
+// const readFilePromise = util.promisify(readFile)
+// const writeFilePromise = util.promisify(writeFile)
+
+// util module is a built in module in node.js. It has a promisify method which converts a callback based function to a promise based function.
+
+
+// const getText = (path) => {
+//     return new Promise((resolve, reject)=>{
+//         readFile(path,'utf8',(err,data)=>{
+//             if(err){
+//                 reject(err)
+//             }
+//             else{
+//                 resolve(data)
+//             }
+//         })
+//     })
+// }
+
+// getText('./content/first.txt')
+// .then((result)=>console.log(result))
+// .catch((err)=>console.log(err))
+
+//comment above 3 lines and uncomment below (start) to see the diffrence between async and sync.
+
+
+// const start = async () => {
+//     try{
+//     const first = await readFilePromise('./content/first.txt', 'utf8')
+//     const second = await readFilePromise('./content/second.txt', 'utf8')
+//     await writeFilePromise('./content/result-mind-grenade.txt',`THIS IS AWESOME : ${first} ${second}`)
+//     console.log(first, second);
+// } catch (error) {
+//     console.log(error);
+// }
+// }
+// start()
+
+// when u write this you can see the result of the first and second text files in the terminal. (Bkz: hello world this is second text file) and you can see the result of the result-mind-grenade.txt file in the content folder. (Bkz: THIS IS AWESOME : hello world this is second text file)
+
+// Now lets try something diffrent
+
+// const {readFile, writeFile } = require('fs').promises
+// comment above line and uncomment below (start) to see the diffrence.
+// const util = require('util')
+// const readFilePromise = util.promisify(readFile)
+// const writeFilePromise = util.promisify(writeFile)
+
+// const start = async () => {
+//     try{
+//     const first = await readFile('./content/first.txt', 'utf8')
+//     const second = await readFile('./content/second.txt', 'utf8')
+//     await writeFile('./content/result-mind-grenade.txt',`THIS IS AWESOME : ${first} ${second}`, {flag: 'a'})
+//     console.log(first, second);
+// } catch (error) {
+//     console.log(error);
+// }
+// }
+// start()
+
+// when u write this you can see the result of the first and second text files in the terminal. (Bkz: hello world this is second text file) and you can see the result of the result-mind-grenade.txt file in the content folder. (Bkz: THIS IS AWESOME : hello world this is second text file)
+
+// Event Emitters
+
+// const EventEmitter = require('events');
+
+// const customEmitter = new EventEmitter();
+
+// customEmitter.on('response', (name, id)=>{
+//     console.log(`data recieved user ${name} with id:${id}`);
+// })
+
+// customEmitter.on('response', (name, id)=>{
+//     console.log(`data recieved ${name} with id:${id}`);
+// })
+// customEmitter.on('response', ()=>{
+//     console.log(`some other logic here`);
+// })
+// customEmitter.emit('response', 'Buse', 19)
+
+
+// when u write this you can see the result of the data recieved user Buse with id:19 and some other logic here in the terminal.
+// for now we are using the built in event emitter but we can create our own event emitter.
+// we can use the event emitter for example when we want to send an email to the user when they sign up to our website.
+
+
+// comment above lines and uncomment below now.
+// Codes from 14-request-event.js
+
 const http = require('http')
 
-const server = http.createServer((req,res)=>{
-    if(req.url === '/'){
-        res.end('Welcome to our home page')
-    }
-    if(req.url === '/about'){
-        // BLOCKING CODE!!!
-        for(let i = 0; i < 1000; i++){
-            for (let j = 0; j < 1000; j++){
-                console.log(`${i} ${j}`);
-            }
-        }
-        res.end('Here is our short history')
-       
-    }
-    res.end(`
-    <h1>Oops!</h1>
-    <p>We can't seem to find the page you are looking for</p>
-    <a href="/">back home</a>
-    `)
+// const server = http.createServer((req, res) => {
+//   res.end('Welcome')
+// })
+
+// Using Event Emitter API
+const server = http.createServer()
+// emits request event
+// subcribe to it / listen for it / respond to it
+server.on('request', (req, res) => {
+  res.end('Welcome')
 })
 
-server.listen(5000, ()=>{
-    console.log('Server listening on port : 5000...')});
+server.listen(5000)
+
+// to have more info about the event emitter you can check the documentation. link: https://nodejs.org/api/events.html#events_class_eventemitter also check the documentation of the http module. link: https://nodejs.org/api/http.html#http_http_createserver_options_requestlistener
